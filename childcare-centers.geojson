@@ -1,7 +1,6 @@
-var childcareCenters = 
 {
-    "centers": [
-        {
+  "type": "FeatureCollection",
+  "features": [{
             "type": "Feature",
             "properties": {
                 "name": "VNA Learning Together Child Care",
@@ -49,6 +48,5 @@ var childcareCenters =
                     44.463066
                 ]
             }
-        }
-    ]
+        }]
 }
