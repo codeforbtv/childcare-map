@@ -1,85 +1,58 @@
 <!doctype html>
 <html>
-  <head>
-  <meta charset="utf-8">
-  <title>Child Care Centers</title>
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css">
-  <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css" rel="stylesheet">
-  <!--Adding the city border here now -->
-  <script src="border.js"></script>
-  <style>
-    /* Bumping the map down just enough to make room for the navbar*/
-    html, body {width:100%; height:100%; padding: 0; margin: 0;}
-    #map {width: 100%; position: absolute; top: 58px; bottom: 0px; z-index:1;}
-  </style>
-  </head>
-  
-  <body>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<head>
+		<meta charset="utf-8">
+		<title>Child Care Centers</title>
 
-    <!-- Bootstrap navbar - Add links/functions here-->
-    <div class="navbar navbar-default navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <a href="#" class="navbar-brand">Child Care Centers: Burlington VT</a>
-          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Overlays <span class="caret"></span></a>
-              <ul class="dropdown-menu" aria-labelledby="themes">
-                <li><a href="../united/">0-5yr Old Population</a></li>
-                <li><a href="../yeti/">Median HH Income</a></li>
-              </ul>
-            </li>
-            <li><a href="https://docs.google.com/document/d/1_oYA_Fmfd448aj5rp5B2D5kdlNpGtzrIipiI8aYHrO4/edit#heading=h.agwdf14xbgl3" target="_blank">About</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div id="map"></div>
-    <script>
-    var map = L.map('map').setView([44.4825904, -73.2226484], 13);
-    L.tileLayer('https://{s}.tiles.mapbox.com/v3/landplanner.hc15p9k5/{z}/{x}/{y}.png', {
-        maxZoom: 18,
-        attribution: 'Mapbox, Openstreetmap Contributors'
-    }).addTo(map);
+		<!-- styles -->
+		<link rel="stylesheet" href="styles.css">
+		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css">
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css">
 
-    // Adding the centers as a pure geojson file - add new features here:
-    // http://geojson.io/#id=gist:wboykinm/2f592dd705c119a22f03&map=13/44.4731/-73.2309
-    // . . . then copy new JSON back into this file before re-launching page
-    $.getJSON("childcare-centers.geojson", function(data) {
+		<!-- geo assets -->
+		<script src="assets/political-borders.js"></script>
+	</head>
 
-        var geojson = L.geoJson(data, {
-          onEachFeature: function (feature, layer) {
-            // Add a custom icon fot the chilcare centers
-            layer.setIcon(L.icon({
-                "iconUrl": "baby.png",
-                "iconSize": [36, 36], // size of the icon
-                "iconAnchor": [18, 18], // point of the icon which will correspond to marker's location
-                "popupAnchor": [0, -18], // point from which the popup should open relative to the iconAnchor
-                "className": "dot"
-            }));
-            layer.bindPopup("<h3>" + feature.properties.name + "</h3><table class='table table-striped table-condensed'><tr><td>Quality</td><td>" + feature.properties.quality + "</td></tr><tr><td>Capacity</td><td>" + feature.properties.Capacity05 + "</td></tr><tr><td>Center Location</td><td>" + feature.properties.CenterLocation + "</td></tr></table>");
-          }
-        });
-        geojson.addTo(map);
-      });
+	<body>
 
-    var myStyle = {
-        "color": "green",
-        "weight": 5,
-        "opacity": 0.65
-    };
+		<!-- Bootstrap navbar - Add links/functions here-->
+		<div class="navbar navbar-default navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="#" class="navbar-brand">Child Care Centers: Burlington VT</a>
+					<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="navbar-collapse collapse" id="navbar-main">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Potential Overlays <span class="caret"></span></a>
+							<ul class="dropdown-menu" aria-labelledby="themes">
+								<li><a href="#">Population: Age 0-5yr</a></li>
+								<li><a href="#">Population: Age 5+yr</a></li>
+								<li><a href="#">Median HH Income</a></li>
+								<li><a href="#">Burlington City Wards</a></li>
+								<li><a href="#">Burlington School Districts</a></li>
+							</ul>
+						</li>
+						<li>
+							<a href="https://docs.google.com/document/d/1_oYA_Fmfd448aj5rp5B2D5kdlNpGtzrIipiI8aYHrO4/edit#heading=h.agwdf14xbgl3" target="_blank">About</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 
-    L.geoJson(myLines, { style: myStyle }).addTo(map);
-    </script>
-  </body>
+		<!-- leaflet root element -->
+		<div id="map"></div>
+
+		<!-- load scripts -->
+		<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+		<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="main.js"></script>
+	</body>
 </html>
