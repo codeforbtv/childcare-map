@@ -3,18 +3,23 @@
  * after leaflet, jQuery and it's required assets.
  */
  
-// create map
-var map = L.map('map').setView([44.4825904, -73.2226484], 13);
 
-// define which tiles to use as background
-L.tileLayer('https://{s}.tiles.mapbox.com/v3/landplanner.hc15p9k5/{z}/{x}/{y}.png', {
+// create map
+var map = L.map('map', {
+    center: new L.LatLng(44.4825904, -73.2226484),
+    zoom: 13
+});	
+
+// define which tiles to use as basemap
+var baseMap = L.tileLayer('https://{s}.tiles.mapbox.com/v3/landplanner.hc15p9k5/{z}/{x}/{y}.png', {
 	maxZoom: 18,
 	attribution: 'Mapbox, Openstreetmap Contributors'
-}).addTo(map);
+});
 
 // Adding the centers as a pure geojson file - add new features here:
 // http://geojson.io/#id=gist:wboykinm/2f592dd705c119a22f03&map=13/44.4731/-73.2309
 // . . . then copy new JSON back into this file before re-launching page
+var testCentersLayer = L.layerGroup();
 $.getJSON("assets/childcare-centers.geojson", function(data) {
   var geojson = L.geoJson(data, {
 	 onEachFeature: function (feature, layer) {
@@ -29,13 +34,28 @@ $.getJSON("assets/childcare-centers.geojson", function(data) {
 		layer.bindPopup("<h3>" + feature.properties.name + "</h3><table class='table table-striped table-condensed'><tr><td>Quality</td><td>" + feature.properties.quality + "</td></tr><tr><td>Capacity</td><td>" + feature.properties.Capacity05 + "</td></tr><tr><td>Center Location</td><td>" + feature.properties.CenterLocation + "</td></tr></table>");
 	 }
   });
-  geojson.addTo(map);
+  //geojson.addTo(map);
+	testCentersLayer.addLayer( geojson );
 });
 
-// Add polygon for the city of Burlington
+
+// Add city of Burlington boundary
 var myStyle = {
 	"color": "green",
 	"weight": 5,
 	"opacity": 0.65
 };
-L.geoJson(political_borders, { style: myStyle }).addTo(map);
+var cityBounds = L.geoJson(political_borders, { style: myStyle });
+
+// add layers to the map
+map.addLayer( baseMap );
+//map.addLayer( cityBounds );  // load without city boundary
+map.addLayer( testCentersLayer );
+
+// a layer control
+// NOTE: we may want to replace this with a different control that makes it faster for users to toggle things on/off
+var overlayLayers = { 
+	"Show City Boundaries": cityBounds,
+	"Show Daycare Centers": testCentersLayer
+};
+var layerControl = L.control.layers( {}, overlayLayers ).addTo(map);
