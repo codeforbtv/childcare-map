@@ -19,7 +19,7 @@ var baseMap = L.tileLayer('https://{s}.tiles.mapbox.com/v3/landplanner.hc15p9k5/
 // Adding the centers as a pure geojson file - add new features here:
 // http://geojson.io/#id=gist:wboykinm/2f592dd705c119a22f03&map=13/44.4731/-73.2309
 // . . . then copy new JSON back into this file before re-launching page
-var testCentersLayer = L.layerGroup();
+var centersLayer = L.layerGroup();
 $.getJSON("assets/childcare-centers.geojson", function(data) {
   var geojson = L.geoJson(data, {
 	 onEachFeature: function (feature, layer) {
@@ -31,31 +31,40 @@ $.getJSON("assets/childcare-centers.geojson", function(data) {
 			 "popupAnchor": [0, -18],	// point from which the popup should open relative to the iconAnchor
 			 "className": "dot"
 		}));
-		layer.bindPopup("<h3>" + feature.properties.name + "</h3><table class='table table-striped table-condensed'><tr><td>Quality</td><td>" + feature.properties.quality + "</td></tr><tr><td>Capacity</td><td>" + feature.properties.Capacity05 + "</td></tr><tr><td>Center Location</td><td>" + feature.properties.CenterLocation + "</td></tr></table>");
+		var popupMarkup;
+		popupMarkup = "<h3>" + feature.properties.name + "</h3>";
+		popupMarkup += "<h5>" + feature.properties.address1 + "</h5>";
+		popupMarkup += "<table class='table table-striped table-condensed'>";
+		popupMarkup += "<tr><td>Rating</td><td>" + feature.properties.rating + "</td></tr>";
+		popupMarkup += "<tr><td>Ages</td><td>" + feature.properties.ages + "</td></tr>";
+		popupMarkup += "<tr><td>Capacity</td><td>" + feature.properties.capacity + "</td></tr>";
+		popupMarkup += "</table>";
+		layer.bindPopup( popupMarkup	);
 	 }
   });
-  //geojson.addTo(map);
-	testCentersLayer.addLayer( geojson );
+	centersLayer.addLayer( geojson );
 });
 
-
-// Add city of Burlington boundary
+// general purpose style
 var myStyle = {
 	"color": "green",
 	"weight": 5,
 	"opacity": 0.65
 };
+
+
+// Add city of Burlington boundary (non-geojson format, see poltical-borders.js)
 var cityBounds = L.geoJson(political_borders, { style: myStyle });
 
 // add layers to the map
 map.addLayer( baseMap );
-//map.addLayer( cityBounds );  // load without city boundary
-map.addLayer( testCentersLayer );
+map.addLayer( cityBounds );
+map.addLayer( centersLayer );
 
 // a layer control
 // NOTE: we may want to replace this with a different control that makes it faster for users to toggle things on/off
 var overlayLayers = { 
 	"Show City Boundaries": cityBounds,
-	"Show Daycare Centers": testCentersLayer
+	"Show Daycare Centers": centersLayer
 };
 var layerControl = L.control.layers( {}, overlayLayers ).addTo(map);

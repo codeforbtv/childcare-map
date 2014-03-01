@@ -1,52 +1,507 @@
 {
-  "type": "FeatureCollection",
-  "features": [{
-            "type": "Feature",
-            "properties": {
-                "name": "VNA Learning Together Child Care",
-                "quality": "5",
-                "Capacity05": "17",
-                "CenterLocation": "center",
-                "popupContent": "VNA Learning Together Child Care"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    -73.214215,
-                    44.483694
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "Burlington Children's Space, Inc.",
-                "quality": "5",
-                "Capacity05": "46",
-                "CenterLocation": "center"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    -73.20922,
-                    44.4868
-                ]
-            }
-        },
-        {
-            "type": "Feature",
-            "properties": {
-                "name": "Christ the King Pre-School and Childcare Center",
-                "quality": "2",
-                "Capacity05": "20",
-                "CenterLocation": "center"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    -73.211147,
-                    44.463066
-                ]
-            }
-        }]
+	"type": "FeatureCollection",
+	"features": [{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.214215",
+			"44.483694"]
+		},
+		"properties": {
+			"name": "VNA Learning Together Child Care",
+			"address1": "20 Allen Street",
+			"address2": "St. Joseph's School ",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "17",
+			"rating": "5",
+			"ages": "3-5",
+			"eduType": "preschool",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.20922",
+			"44.4868"]
+		},
+		"properties": {
+			"name": "Burlington Children's Space, Inc.",
+			"address1": "241 North Winooski Avenue",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "46",
+			"rating": "5",
+			"ages": "0-5",
+			"eduType": "daycare + preschool",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.265171",
+			"44.519771"]
+		},
+		"properties": {
+			"name": "Jewell, Melanie",
+			"address1": "134 Northgate Road",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "6",
+			"rating": "n/a",
+			"ages": "0-5",
+			"eduType": "daycare + preschool",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.211147",
+			"44.463066"]
+		},
+		"properties": {
+			"name": "Christ the King Pre-School and Childcare Center",
+			"address1": "136 Locust Street",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "20",
+			"rating": "2",
+			"ages": "3-5",
+			"eduType": "preschool",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.21306",
+			"44.46678"]
+		},
+		"properties": {
+			"name": "Stepping Stones Children's Center, Inc.",
+			"address1": "75 Hayward Street",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "23",
+			"rating": "5",
+			"ages": "2-5",
+			"eduType": "preschool",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.19589",
+			"44.48201"]
+		},
+		"properties": {
+			"name": "Trinity Children's Center, Inc.",
+			"address1": "34 Fletcher Place",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "70",
+			"rating": "5",
+			"ages": "3-5",
+			"eduType": "preschool",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.194573",
+			"44.474527"]
+		},
+		"properties": {
+			"name": "UVM Campus Children's Center",
+			"address1": "633 Main Street",
+			"address2": "161 \"C\" Bldg. Living & Learning Center",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "40",
+			"rating": "5",
+			"ages": "0-5",
+			"eduType": "daycare",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.210794",
+			"44.474772"]
+		},
+		"properties": {
+			"name": "King Street Center. Inc.",
+			"address1": "179 South Winooski Avenue",
+			"address2": "PO Box 1615",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05402",
+			"capacity": "60",
+			"rating": "5",
+			"ages": "3-5",
+			"eduType": "preschool",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.21228",
+			"44.4542"]
+		},
+		"properties": {
+			"name": "Cobeo, Maybeline",
+			"address1": "121 Ferguson Avenue",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "8",
+			"rating": "n/a",
+			"ages": "0-5",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.21544",
+			"44.48365"]
+		},
+		"properties": {
+			"name": "Robin's Nest Childrens Center, Inc.",
+			"address1": "20 Allen Street",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "32",
+			"rating": "5",
+			"ages": "0-5",
+			"eduType": "daycare + preschool",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.20323",
+			"44.47901"]
+		},
+		"properties": {
+			"name": "Gan Yeladim Preschool",
+			"address1": "57 South Williams Street",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "26",
+			"rating": "n/a",
+			"ages": "0-5",
+			"eduType": "daycare + preschool",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.237899",
+			"44.501802"]
+		},
+		"properties": {
+			"name": "Bassick, Linda",
+			"address1": "838 North Avenue",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "6",
+			"rating": "n/a",
+			"ages": "0-5 ",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.21688",
+			"44.48461"]
+		},
+		"properties": {
+			"name": "Sustainability Academy Preschool",
+			"address1": "123 North Street ",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "15",
+			"rating": "4",
+			"ages": "3-5",
+			"eduType": "preschool",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.24224",
+			"44.50729"]
+		},
+		"properties": {
+			"name": "Kirk, Donna",
+			"address1": "36 Blondin Circle",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05408",
+			"capacity": "8",
+			"rating": "n/a",
+			"ages": "0-5",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.266424",
+			"44.51913"]
+		},
+		"properties": {
+			"name": "Waite, Jillian",
+			"address1": "321 Northgate",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05408",
+			"capacity": "5",
+			"rating": "1",
+			"ages": "daycare",
+			"eduType": "",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.19634",
+			"44.48254"]
+		},
+		"properties": {
+			"name": "Reid, Nancy",
+			"address1": "49 Fletcher Pl.",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "6",
+			"rating": "2",
+			"ages": "0-5 ",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.21283",
+			"44.45269"]
+		},
+		"properties": {
+			"name": "Tuttle, Ann",
+			"address1": "94 Richardson Street",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "6",
+			"rating": "3",
+			"ages": "0-5",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.24489",
+			"44.51181"]
+		},
+		"properties": {
+			"name": "Nicolay, Traci",
+			"address1": "120 Heineberg Road ",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05408",
+			"capacity": "5",
+			"rating": "1",
+			"ages": "0-5",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.25918",
+			"44.51852"]
+		},
+		"properties": {
+			"name": "Daly, Tammy",
+			"address1": "31 Barley Road",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05408",
+			"capacity": "6",
+			"rating": "2",
+			"ages": "0-5",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.249258",
+			"44.518629"]
+		},
+		"properties": {
+			"name": "Theriault, Kimberly",
+			"address1": "248 James Avenue",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "6",
+			"rating": "n/a",
+			"ages": "0-5",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.25013",
+			"44.519765"]
+		},
+		"properties": {
+			"name": "Hammond, Marta",
+			"address1": "179 Sandra Circle",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05408",
+			"capacity": "6",
+			"rating": "2",
+			"ages": "0-5",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.21031",
+			"44.45519"]
+		},
+		"properties": {
+			"name": "Leicht, Donna",
+			"address1": "414 Flynn Avenue",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "7",
+			"rating": "4",
+			"ages": "0-5",
+			"eduType": "daycare",
+			"bizType": "in home"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.21414",
+			"44.47773"]
+		},
+		"properties": {
+			"name": "Y Early Childhood Program at St. Paul St.",
+			"address1": "81 St. Paul Street",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "12",
+			"rating": "5",
+			"ages": "0-3",
+			"eduType": "daycare",
+			"bizType": "center"
+		}
+	},
+	{
+		"type": "Feature",
+		"geometry": {
+			"type": "Point",
+			"coordinates": ["-73.198766",
+			"44.481674"]
+		},
+		"properties": {
+			"name": "Mater Christi Preschool PSG",
+			"address1": "50 Mansfield Avenue",
+			"address2": "",
+			"city": "Burlington",
+			"state": "VT",
+			"zip": "05401",
+			"capacity": "20",
+			"rating": "n/a",
+			"ages": "3-5",
+			"eduType": "preschool",
+			"bizType": "center"
+		}
+	}]
 }
