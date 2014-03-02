@@ -19,7 +19,7 @@ var baseMap = L.tileLayer('https://{s}.tiles.mapbox.com/v3/landplanner.hc15p9k5/
 // Adding the centers as a pure geojson file - add new features here:
 // http://geojson.io/#id=gist:wboykinm/2f592dd705c119a22f03&map=13/44.4731/-73.2309
 // . . . then copy new JSON back into this file before re-launching page
-var centersLayer = L.markerClusterGroup( {maxClusterRadius: 60} );
+var centersLayer = L.markerClusterGroup( {maxClusterRadius: 40} );
 $.getJSON("assets/childcare-centers.geojson", function(data) {
   var geojson = L.geoJson(data, {
 	 onEachFeature: function (feature, layer) {
