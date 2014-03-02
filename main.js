@@ -25,7 +25,7 @@ $.getJSON("assets/childcare-centers.geojson", function(data) {
 	 onEachFeature: function (feature, layer) {
 		// Add a custom icon fot the chilcare centers
 		layer.setIcon(L.icon({
-			 "iconUrl": "images/baby.png",
+			 "iconUrl": "images/center.png",
 			 "iconSize": [36, 36],		// size of the icon
 			 "iconAnchor": [18, 18],	// point of the icon which will correspond to marker's location
 			 "popupAnchor": [0, -18],	// point from which the popup should open relative to the iconAnchor
