@@ -47,15 +47,14 @@ $.getJSON("assets/childcare-centers.geojson", function(data) {
 
 // Adding ward boundaries
 var wardsLayer = L.layerGroup();
+var wardColors = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'teal', 'grey'];
 $.getJSON("assets/ward-borders.geojson", function(data) {
   var geojson = L.geoJson(data, {
 		
-		// set styles
-		style: {
-			"color": "green",
-			"weight": 3,
-			"opacity": 0.65
-		},
+		// set ward color
+		style: function(feature) {
+			return {color: wardColors[ feature.properties.label - 1 ]}
+    },
 	
 		// digest each feature
 		onEachFeature: function (feature, layer) {
