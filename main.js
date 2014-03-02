@@ -45,19 +45,36 @@ $.getJSON("assets/childcare-centers.geojson", function(data) {
 	centersLayer.addLayer( geojson );
 });
 
-// general purpose style
-var myStyle = {
-	"color": "green",
-	"weight": 5,
-	"opacity": 0.65
-};
+// Adding ward boundaries
+var wardsLayer = L.layerGroup();
+$.getJSON("assets/ward-borders.geojson", function(data) {
+  var geojson = L.geoJson(data, {
+		
+		// set styles
+		style: {
+			"color": "green",
+			"weight": 3,
+			"opacity": 0.65
+		},
+	
+		// digest each feature
+		onEachFeature: function (feature, layer) {
+			// Add a custom icon fot the chilcare centers
+			var popupMarkup;
+			popupMarkup = feature.properties.name;
+			layer.bindPopup( popupMarkup	);
+		}
+  });
+	wardsLayer.addLayer( geojson );
+});
 
 
 // Add city of Burlington boundary (non-geojson format, see poltical-borders.js)
-var cityBounds = L.geoJson(political_borders, { style: myStyle });
+var cityBounds = L.geoJson(political_borders, { style: {'color': 'black'}, "opacity": 0.8 });
 
 // add layers to the map
 map.addLayer( baseMap );
+map.addLayer( wardsLayer );
 map.addLayer( cityBounds );
 map.addLayer( centersLayer );
 
@@ -65,6 +82,7 @@ map.addLayer( centersLayer );
 // NOTE: we may want to replace this with a different control that makes it faster for users to toggle things on/off
 var overlayLayers = { 
 	"Show City Boundaries": cityBounds,
+	"Show Ward Boundaries": wardsLayer,
 	"Show Daycare Centers": centersLayer
 };
 var layerControl = L.control.layers( {}, overlayLayers ).addTo(map);
