@@ -2,7 +2,6 @@
  * This script is the starting point for our leaflet work.  It should be loaded
  * after leaflet, jQuery and it's required assets.
  */
- 
 
 // create map
 var map = L.map('map', {
@@ -10,27 +9,30 @@ var map = L.map('map', {
     zoom: 13
 });	
 
+// leaflet-hash plugin handles updating url
+// NOTE: does not update selected layers, may want to fix that
+var hash = new L.Hash(map);
+
 // define which tiles to use as basemap
 var baseMap = L.tileLayer('https://{s}.tiles.mapbox.com/v3/landplanner.hc15p9k5/{z}/{x}/{y}.png', {
 	maxZoom: 18,
 	attribution: 'Mapbox, Openstreetmap Contributors'
 });
 
-// Adding the centers as a pure geojson file - add new features here:
-// http://geojson.io/#id=gist:wboykinm/2f592dd705c119a22f03&map=13/44.4731/-73.2309
-// . . . then copy new JSON back into this file before re-launching page
-var centersLayer = L.markerClusterGroup( {maxClusterRadius: 40} );
+// Adding the centers
+var centersClusterLayer = L.markerClusterGroup( {maxClusterRadius: 40} );
+var centersLayer = L.layerGroup();
 $.getJSON("assets/childcare-centers.geojson", function(data) {
   var geojson = L.geoJson(data, {
 	 onEachFeature: function (feature, layer) {
-		// Add a custom icon fot the chilcare centers
-		layer.setIcon(L.icon({
-			 "iconUrl": "images/center.png",
-			 "iconSize": [36, 36],		// size of the icon
-			 "iconAnchor": [18, 18],	// point of the icon which will correspond to marker's location
-			 "popupAnchor": [0, -18],	// point from which the popup should open relative to the iconAnchor
-			 "className": "dot"
-		}));
+		
+		// Add a custom icon for the chilcare centers
+		switch( feature.properties.bizType ) {
+			case "center": 	layer.setIcon( iconCareCenter ); break;
+			case "in home": layer.setIcon( iconInHome ); break;
+		}
+		
+		// set popup message
 		var popupMarkup;
 		popupMarkup = "<h3>" + feature.properties.name + "</h3>";
 		popupMarkup += "<h5>" + feature.properties.address1 + "</h5>";
@@ -42,6 +44,7 @@ $.getJSON("assets/childcare-centers.geojson", function(data) {
 		layer.bindPopup( popupMarkup	);
 	 }
   });
+	centersClusterLayer.addLayer( geojson );
 	centersLayer.addLayer( geojson );
 });
 
@@ -68,21 +71,33 @@ $.getJSON("assets/ward-borders.geojson", function(data) {
 	wardsLayer.addLayer( geojson );
 });
 
-
 // Add city of Burlington boundary (non-geojson format, see poltical-borders.js)
 var cityBounds = L.geoJson(political_borders, { style: {'color': 'black'}, "opacity": 0.8 });
 
-// add layers to the map
+// add intial layers to the map
+// NOTE: should check url for presets and load those by default
 map.addLayer( baseMap );
-map.addLayer( wardsLayer );
 map.addLayer( cityBounds );
-map.addLayer( centersLayer );
+map.addLayer( centersClusterLayer );
+//map.addLayer( centersLayer );
 
 // a layer control
 // NOTE: we may want to replace this with a different control that makes it faster for users to toggle things on/off
 var overlayLayers = { 
 	"Show City Boundaries": cityBounds,
 	"Show Ward Boundaries": wardsLayer,
-	"Show Daycare Centers": centersLayer
+	"Show Centers": centersLayer,
+	"Show Centers (Clustered)": centersClusterLayer
 };
-var layerControl = L.control.layers( {}, overlayLayers ).addTo(map);
+var layerControl = L.control.layers( {}, overlayLayers, {collapsed:false} ).addTo(map);
+
+
+// add a legend
+var populationLegend = L.control({position: 'topright'});
+populationLegend.onAdd = function (map) {
+var div = L.DomUtil.create('div', 'info legend-wrap leaflet-control-layers');
+	div.innerHTML += '<div><img src="images/inhome.png" alt="legend" width="20" height="20">In-Home Child Care</div>';
+	div.innerHTML += '<div><img src="images/center.png" alt="legend" width="20" height="20">Child Care Center</div>';
+return div;
+};
+populationLegend.addTo(map);
