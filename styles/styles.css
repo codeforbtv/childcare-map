@@ -1,11 +1,13 @@
 html, 
- body 
+body 
  {
 	 width:100%; 
 	 height:100%; 
 	 padding: 0; 
 	 margin: 0;
  }
+.right {	float: right; }
+.left { float: left; }
  #map 
  {
 	 width: 100%; 
@@ -14,3 +16,12 @@ html,
 	 bottom: 0px; 
 	 z-index:1;
  }
+.leaflet-top.leaflet-right > div {
+	width: 100%;
+}
+.legend-wrap  {
+	padding: 7px;
+}
+.legend-wrap  img {
+	margin: 3px 7px 3px 0;
+}
