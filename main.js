@@ -10,6 +10,9 @@ var map = L.map('map', {
     zoom: 13
 });	
 
+// leaflet-hash plugin handles updating url
+var hash = new L.Hash(map);
+
 // define which tiles to use as basemap
 var baseMap = L.tileLayer('https://{s}.tiles.mapbox.com/v3/landplanner.hc15p9k5/{z}/{x}/{y}.png', {
 	maxZoom: 18,
