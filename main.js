@@ -50,21 +50,32 @@ $.getJSON("assets/childcare-centers.geojson", function(data) {
 
 // Adding ward boundaries
 var wardsLayer = L.layerGroup();
-var wardColors = ['blue', 'teal', 'teal', 'blue', 'purple', 'blue', 'purple', 'purple'];
-$.getJSON("assets/ward-borders.geojson", function(data) {
+$.getJSON("assets/wards-2014.geojson", function(data) {
+  function getColor(d) {
+  	console.log(d);
+    return d == 'North' ? '#3B424D' :
+	    d == 'South'  ? '#306E73' :
+	    d == 'East'  ? '#B39C85' :
+	    '#FF5335';
+	};
+
+	function getStyle(feature) {
+    return {
+      // set ward color
+			fillColor: getColor(feature.properties.district),
+			fillOpacity: 0.6,
+			color: '#333',
+			weight: '1px'
+    }
+  }
+
   var geojson = L.geoJson(data, {
-		
-		// set ward color
-		style: function(feature) {
-			return {color: wardColors[ feature.properties.label - 1 ]}
-    },
-		opacity: 0.01,
-	
+		style: getStyle,
 		// digest each feature
 		onEachFeature: function (feature, layer) {
 			// Add a custom icon fot the chilcare centers
 			var popupMarkup;
-			popupMarkup = feature.properties.name;
+			popupMarkup = "<h3>Ward " + feature.properties.ward + "</h3><p>" + feature.properties.district + " District</p>";
 			layer.bindPopup( popupMarkup	);
 		}
   });
@@ -72,7 +83,13 @@ $.getJSON("assets/ward-borders.geojson", function(data) {
 });
 
 // Add city of Burlington boundary (non-geojson format, see poltical-borders.js)
-var cityBounds = L.geoJson(political_borders, { style: {'color': 'black'}, "opacity": 0.8 });
+var cityBounds = L.geoJson(political_borders, { 
+	style: {
+		'color': '#555',
+		'fillOpacity': 0,
+		'weight': '3px'
+	} 
+});
 
 // add intial layers to the map
 // NOTE: should check url for presets and load those by default
@@ -84,7 +101,7 @@ map.addLayer( centersClusterLayer );
 // a layer control
 // NOTE: we may want to replace this with a different control that makes it faster for users to toggle things on/off
 var overlayLayers = { 
-	"Show City Boundaries": cityBounds,
+	"Show City Boundary": cityBounds,
 	"Show Ward Boundaries": wardsLayer,
 	"Show Centers": centersLayer,
 	"Show Centers (Clustered)": centersClusterLayer
